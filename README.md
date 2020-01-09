@@ -23,7 +23,7 @@ It also has out-of-box support for retraining on Google Open Images dataset.
 ```bash
 wget -P models https://storage.googleapis.com/models-hao/mobilenet-v1-ssd-mp-0_675.pth
 wget -P models https://storage.googleapis.com/models-hao/voc-model-labels.txt
-python run_ssd_live_demo.py mb1-ssd models/mobilenet-v1-ssd-mp-0_675.pth models/voc-model-labels.txt 
+python3 run_ssd_live_demo.py mb1-ssd models/mobilenet-v1-ssd-mp-0_675.pth models/voc-model-labels.txt 
 ```
 ### Run the live demo in Caffe2
 
@@ -187,7 +187,7 @@ Before you start you can try the demo.
 ```bash
 wget -P models https://storage.googleapis.com/models-hao/gun_model_2.21.pth
 wget -P models https://storage.googleapis.com/models-hao/open-images-model-labels.txt
-python run_ssd_example.py mb1-ssd models/gun_model_2.21.pth models/open-images-model-labels.txt ~/Downloads/big.JPG
+python3 run_ssd_example.py mb1-ssd models/gun_model_2.21.pth models/open-images-model-labels.txt downloads/2.jpg
 ```
 
 ![Example of Gun Detection](gun.jpg)
@@ -198,7 +198,7 @@ If you manage to get more annotated data, the accuracy could become much higher.
 ### Download data
 
 ```bash
-python open_images_downloader.py --root ~/data/open_images --class_names "Handgun,Shotgun" --num_workers 20
+python3 open_images_downloader.py --root data/open_images --class_names "Handgun,Shotgun" --num_workers 20
 ```
 
 It will download data into the folder ~/data/open_images.
@@ -218,7 +218,7 @@ is the annotation file.
 ### Retrain
 
 ```bash
-python train_ssd.py --dataset_type open_images --datasets ~/data/open_images --net mb1-ssd --pretrained_ssd models/mobilenet-v1-ssd-mp-0_675.pth --scheduler cosine --lr 0.01 --t_max 100 --validation_epochs 5 --num_epochs 100 --base_net_lr 0.001  --batch_size 5
+python3 train_ssd.py --dataset_type open_images --datasets data/open_images --net mb1-ssd --pretrained_ssd models/mobilenet-v1-ssd-mp-0_675.pth --scheduler cosine --lr 0.01 --t_max 100 --validation_epochs 5 --num_epochs 100 --base_net_lr 0.001  --batch_size 5
 ```
 
 You can freeze the base net, or all the layers except the prediction heads. 
@@ -249,7 +249,7 @@ a handy option to roughly balance the data.
 ### Test on image
 
 ```bash
-python run_ssd_example.py mb1-ssd models/mobilenet-v1-ssd-Epoch-99-Loss-2.2184619531035423.pth models/open-images-model-labels.txt ~/Downloads/gun.JPG
+python3 run_ssd_example.py mb1-ssd models/mobilenet-v1-ssd-Epoch-99-Loss-2.2184619531035423.pth models/open-images-model-labels.txt ~downloads/1.JPG
 ```
 
 
